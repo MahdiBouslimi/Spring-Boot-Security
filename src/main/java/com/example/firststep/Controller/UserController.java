@@ -43,11 +43,21 @@ public class UserController {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/save").toUriString());
         return ResponseEntity.created(uri).body(userService.saveUser(user));
     }
-    @PostMapping("/role/save")
-    public ResponseEntity<Role>saveRole(@RequestBody Role role){
-        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/role/save").toUriString());
-        return ResponseEntity.created(uri).body(userService.saveRole(role));
+    @DeleteMapping("/delete/{user-id}")
+    @ResponseBody
+    public void removeUser(@PathVariable("user-id") long id) {
+
+        userService.deleteUserBYid(id);
     }
+
+    @PutMapping("/modify-user")
+    @ResponseBody
+    public User modifyRole(@RequestBody User user) {
+        return userService.saveUser(user);
+    }
+
+
+
     @PostMapping("/role/addtouser")
     public ResponseEntity<?>AddRoleToUser(@RequestBody AddRoleToUser form){
         userService.addRoleToUser(form.getUserName(), form.getUserName());

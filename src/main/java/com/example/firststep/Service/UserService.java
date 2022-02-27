@@ -48,11 +48,6 @@ public class UserService implements IUserService, UserDetailsService {
         return userRepo.save(user);
     }
 
-    @Override
-    public Role saveRole(Role role) {
-        log.info("Saiving new role {} to the database", role.getName());
-        return roleRepo.save(role) ;
-    }
 
     @Override
     public void addRoleToUser(String name, String roleName) {
@@ -75,8 +70,8 @@ public class UserService implements IUserService, UserDetailsService {
     }
 
     @Override
-    public User updateUser(User user) {
-        return null;
+    public User UpdateUser(User user) {
+        return userRepo.save(user);
     }
 
     @Override

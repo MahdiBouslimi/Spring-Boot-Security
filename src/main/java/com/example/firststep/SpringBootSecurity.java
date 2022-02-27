@@ -2,6 +2,7 @@ package com.example.firststep;
 
 import com.example.firststep.Entity.Role;
 import com.example.firststep.Entity.User;
+import com.example.firststep.Repository.RoleRepo;
 import com.example.firststep.Service.UserService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -31,10 +32,10 @@ public class SpringBootSecurity {
 		return  new BCryptPasswordEncoder();
 	}
 	@Bean
-	CommandLineRunner run(UserService userService){
+	CommandLineRunner run(UserService userService, RoleRepo roleRepo){
 		return args -> {
-		 userService.saveRole(new Role(null,"ADMIN"));
-		 userService.saveRole(new Role(null,"SUPER_ADMIN"));
+			roleRepo.save(new Role(null,"ADMIN"));
+			roleRepo.save(new Role(null,"SUPER_ADMIN"));
 		 userService.saveUser(new User(null, "mahdi","mahdi@gmail.com","1234",new ArrayList<>()));
 		 userService.saveUser(new User(null, "ghaith","ghaith@gmail.com","1234",new ArrayList<>()));
 		 userService.addRoleToUser("mahdi","SUPER_ADMIN");
